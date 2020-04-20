@@ -37,6 +37,7 @@
 		9D7360FE236513DE00DC6ACB /* CleanseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D7360FD236513DE00DC6ACB /* CleanseTests.swift */; };
 		9D736109236513DE00DC6ACB /* CleanseUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D736108236513DE00DC6ACB /* CleanseUITests.swift */; };
 		9D83FCD22434E9D200A1C759 /* ForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D83FCD12434E9D200A1C759 /* ForYouViewController.swift */; };
+		9D8B7761244D2FEB00D2A3F7 /* QuotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7760244D2FEB00D2A3F7 /* QuotesTableViewCell.swift */; };
 		9D8C534D24201FA9004F35C7 /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C534C24201FA9004F35C7 /* ConsumeViewController.swift */; };
 		9DCEB53823DE0FBF00546242 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */; };
 		9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */; };
@@ -110,6 +111,7 @@
 		9D736108236513DE00DC6ACB /* CleanseUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CleanseUITests.swift; sourceTree = "<group>"; };
 		9D73610A236513DE00DC6ACB /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		9D83FCD12434E9D200A1C759 /* ForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewController.swift; sourceTree = "<group>"; };
+		9D8B7760244D2FEB00D2A3F7 /* QuotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTableViewCell.swift; sourceTree = "<group>"; };
 		9D8C534C24201FA9004F35C7 /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
 		9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeToPlayViewController.swift; sourceTree = "<group>"; };
@@ -204,6 +206,7 @@
 				9DF6E6ED23AC8B6300DCB973 /* SleepViewController.swift */,
 				9D83FCD12434E9D200A1C759 /* ForYouViewController.swift */,
 				9DF6E6EF23AC8B6E00DCB973 /* DepressionViewController.swift */,
+				9D8B7760244D2FEB00D2A3F7 /* QuotesTableViewCell.swift */,
 				9DE8FCE2242469980035E3DA /* LoveViewController.swift */,
 				9DE8FCE4242469C50035E3DA /* HealthViewController.swift */,
 				9DE8FCE6242469DB0035E3DA /* HappinessViewController.swift */,
@@ -546,6 +549,7 @@
 				9DE8FCE7242469DB0035E3DA /* HappinessViewController.swift in Sources */,
 				9D0663AA2367B22A00385DEE /* Book.swift in Sources */,
 				9D503BBC237252AE0070F318 /* OverviewViewController.swift in Sources */,
+				9D8B7761244D2FEB00D2A3F7 /* QuotesTableViewCell.swift in Sources */,
 				9D0663B02367B3AA00385DEE /* Summary.swift in Sources */,
 				9D8C534D24201FA9004F35C7 /* ConsumeViewController.swift in Sources */,
 				9D328D1A23662937003768CF /* TextViewController.swift in Sources */,

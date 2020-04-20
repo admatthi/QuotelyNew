@@ -14,7 +14,7 @@ import FBSDKCoreKit
 
 var backgroundimages = [UIImage]()
 
-class DepressionViewController: UIViewController, UICollectionViewDelegate, UICollectionViewDataSource  {
+class DepressionViewController: UIViewController, UITableViewDelegate, UITableViewDataSource  {
     
     func logFavoriteTapped(referrer : String) {
         AppEvents.logEvent(AppEvents.Name(rawValue: "favorite tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
@@ -40,7 +40,9 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             bookmarktapped = false
             
+            
             let book = self.book(atIndex: 0)
+            tableView.reloadData()
             //            if book?.bookID == "Title" {
             //
             //                return cell
@@ -52,31 +54,16 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             
             //            timeagolabel.text = dateago
-            
-            let myIndexPath = IndexPath(row: 1, section: 0)
-            
-            
-            titleCollectionView.scrollToItem(at: myIndexPath, at: UICollectionView.ScrollPosition.top, animated: false)
+        
             
             
-            titleCollectionView.reloadData()
-            genreCollectionView.reloadData()
+            
         }
     }
     
     var genreindex = Int()
     
-    func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        
-        switch collectionView {
-        case self.genreCollectionView:
-            return genres.count
-        case self.titleCollectionView:
-            return books.count
-        default:
-            return 0
-        }
-    }
+  
     
     @IBOutlet weak var blur: UIButton!
     @IBAction func tapBlur(_ sender: Any) {
@@ -84,39 +71,15 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         self.performSegue(withIdentifier: "HappyToSale", sender: self)
         
     }
-    func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
+    @IBOutlet weak var tableView: UITableView!
+    func tableView(_ tableView: UITableView, didSelectItemAt indexPath: IndexPath) {
         
         refer = "On Tap Discover"
         counter = 0
         let generator = UIImpactFeedbackGenerator(style: .heavy)
         generator.impactOccurred()
         self.view.endEditing(true)
-        
-        if collectionView.tag == 1 {
-            
-            selectedindex = indexPath.row
-            
-            logGenreViewed(referrer: referrer)
-            genreCollectionView.scrollToItem(at: indexPath, at: UICollectionView.ScrollPosition.centeredHorizontally, animated: true)
-            
-            collectionView.alpha = 0
-            
-            selectedgenre = genres[indexPath.row]
-            
-            genreindex = indexPath.row
-            
-            queryforids { () -> Void in
-                
-            }
-            
-            //            titleCollectionView.scrollToItem(at: indexPath, at: .top, animated: false)
-            
-            
-            genreCollectionView.reloadData()
-            
-            
-            
-        } else {
+    
             
             let book = self.book(atIndexPath: indexPath)
             
@@ -226,7 +189,6 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             
             
-        }
         
         
     }
@@ -290,322 +252,10 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
     }
     
-    func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
-        
-        switch collectionView {
-        // Genre collection
-        case self.genreCollectionView:
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Categories", for: indexPath) as! GenreCollectionViewCell
-            
-            collectionView.alpha = 1
-            cell.titlelabel.text = genres[indexPath.row]
-            //            cell.titlelabel.sizeToFit()
-            
-            cell.selectedimage.layer.cornerRadius = 10.0
-            cell.selectedimage.layer.masksToBounds = true
-            
-            
-            //            addstaticbooks()
-            
-            genreCollectionView.alpha = 1
-            
-            if selectedindex == 0 {
-                
-                if indexPath.row == 0 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-            }
-            
-            if selectedindex == 1 {
-                
-                if indexPath.row == 1 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-                
-            }
-            
-            if selectedindex == 2 {
-                
-                if indexPath.row == 2 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-                
-            }
-            
-            if selectedindex == 3 {
-                
-                if indexPath.row == 3 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-                
-            }
-            
-            if selectedindex == 4 {
-                
-                if indexPath.row == 4 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-            }
-            
-            if selectedindex == 5 {
-                
-                if indexPath.row == 5 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-                
-            }
-            
-            if selectedindex == 6 {
-                
-                if indexPath.row == 6 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-                
-            }
-            
-            if selectedindex == 7 {
-                
-                if indexPath.row == 7 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-                
-            }
-            
-            if selectedindex == 8 {
-                
-                if indexPath.row == 8 {
-                    
-                    cell.titlelabel.alpha = 1
-                    cell.selectedimage.alpha = 1
-                    
-                } else {
-                    
-                    cell.titlelabel.alpha = 0.25
-                    cell.selectedimage.alpha = 0
-                    
-                }
-                
-            }
-            
-            
-            if selectedindex == 1000 {
-                
-                cell.titlelabel.alpha = 0.25
-                cell.selectedimage.alpha = 0
-            }
-            
-            return cell
-            
-        case self.titleCollectionView:
-            let book = self.book(atIndexPath: indexPath)
-            titleCollectionView.alpha = 1
-            let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "Books", for: indexPath) as! TitleCollectionViewCell
-            //
-            //            if book?.bookID == "Title" {
-            //
-            //                return cell
-            //
-            //            } else {
-            
-            
-            
-            let name = book?.name
-            
-            //            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-            //               let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //               blurEffectView.frame = cell.backlabel.bounds
-            //               blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            //
-            //            cell.backlabel.addSubview(blurEffectView)
-            
-            
-            if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
-                
-                cell.titleImage.kf.setImage(with: imageUrl)
-                
-            }//            cell.backlabel.image = backgroundimages[backgroundcounter]
-            
-            var viewscounter =  book?.profession
-            cell.viewslabel.text = viewscounter
-            
-            cell.titlelabel.text = name
-            //                       cell.titleback.clipsToBounds = true
-            
-            cell.layer.cornerRadius = 10.0
-            cell.layer.cornerRadius = 10.0
-            
-            
-            //                cell.tapup.tag = indexPath.row
-            //
-            //                cell.tapup.addTarget(self, action: #selector(DiscoverViewController.tapWishlist), for: .touchUpInside)
-            
-            
-            
-            
-            
-            
-            //                cell.titleback.kf.setImage(with: imageUrl)
-            
-            
-            //                let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-            //                                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //                          blurEffectView.frame = cell.titleback.bounds
-            //                                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            //
-            //                          cell.titleback.addSubview(blurEffectView)
-            
-            
-            //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-            //                    let blurEffectView = UIVisualEffectView(effect: blurEffect)
-            //                    blurEffectView.frame = cell.titleback.bounds
-            //                    blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-            //                    cell.titleback.addSubview(blurEffectView)
-            
-
-            
-            let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-            
-            let dateFormatter = DateFormatter()
-            dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-            let date = dateFormatter.date(from:publisheddate)!
-            
-            var dateago = date.timeAgoSinceDate()
-            
-            dateago = dateago.replacingOccurrences(of: " ", with: "")
-            
-            let intdateago = Int(dateago) ?? 24
-            
-            if intdateago > 23 {
-                
-                cell.newlabel.alpha = 0
-                
-            } else {
-                
-                cell.newlabel.alpha = 1
-
-            }
-
-            
-            print(dateago)
-            
-            var backgroundcounter = Int.random(in: 1..<9)
-
-            cell.timeago.text = "\(backgroundcounter)M views"
-            
-            
-            cell.layer.cornerRadius = 5.0
-            cell.layer.masksToBounds = true
-            
-            
-            //
-            //            if let viewsnum = book?.views {
-            //
-            //                cell.viewslabel.text = "\(book!.views!)M views"
-            //
-            //            } else {
-            //
-            //                cell.viewslabel.text = "6M views"
-            //
-            //            }
-            
-            
-            if name == "x" {
-                
-                cell.titlelabel.alpha = 0
-                cell.backlabel.alpha = 0
-                cell.viewslabel.alpha = 0
-                cell.titleImage.alpha = 0
-                cell.greylabel.alpha = 0
-            } else {
-                
-                cell.titlelabel.alpha = 1
-                cell.backlabel.alpha = 1
-                cell.viewslabel.alpha = 1
-                cell.titleImage.alpha = 1
-                cell.greylabel.alpha = 1
-            }
-            
-            
-            return cell
-            
-            //            }
-            
-        default:
-            
-            return UICollectionViewCell()
-        }
-        
-    }
-    
     @IBOutlet weak var backimage2: UIImageView!
     @IBOutlet weak var depression: UIImageView!
     var selectedindex = Int()
-    @IBOutlet weak var genreCollectionView: UICollectionView!
-    @IBOutlet weak var titleCollectionView: UICollectionView!
+
     
     @IBAction func tapDelete(_ sender: Any) {
         
@@ -625,6 +275,66 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         
     }
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
+        
+        
+    }
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+              
+          return books.count
+
+          }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        
+        
+        
+        let book = self.book(atIndexPath: indexPath)
+        
+        let cell = tableView.dequeueReusableCell(withIdentifier: "Quotes", for: indexPath) as! QuotesTableViewCell
+        
+        cell.author.text = book?.genre
+        cell.quote.text = book?.headline1
+        
+        cell.selectionStyle = .none
+              let dateFormatter = DateFormatter()
+              dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+ 
+                   let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                   
+                   dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                   let date = dateFormatter.date(from:publisheddate)!
+                   
+                   let dateago = date.timeAgoSinceDate()
+                   
+                   
+        cell.datelabel.text = dateago
+        
+//        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
+//
+//
+//
+//        let today = Date()
+//        dateFormatter.dateFormat = "MMM dd"
+//        let datestring = dateFormatter.string(from: result ?? today)
+//
+//        cell.datelabel.text = datestring
+
+        
+        if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+            
+            cell.profilepic.kf.setImage(with: imageUrl)
+            
+        }//
+        
+        return cell
+        
+        
+    }
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -641,9 +351,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         //
         //                    backimage2.addSubview(blurEffectView)
         //
-        titleCollectionView.layer.cornerRadius = 10.0
-        titleCollectionView.clipsToBounds = true
-        
+   
         
         backimage2.layer.cornerRadius = 10.0
         backimage2.clipsToBounds = true
@@ -658,11 +366,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         genres.removeAll()
         genres.append("Money")
-        genres.append("Stocks")
-//        genres.append("Real Estate")
-        genres.append("Career")
         
-        genres.append("Success")
         //                  genres.append("Finance")
         //                  genres.append("Economics")
         
@@ -670,7 +374,6 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         selectedgenre = genres[0]
         selectedindex = 0
         
-        genreCollectionView.reloadData()
         
         queryforids { () -> Void in
             
@@ -686,18 +389,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
         
         dateformat = result
         
-        var screenSize = titleCollectionView.bounds
-        var screenWidth = screenSize.width
-        var screenHeight = screenSize.height
-        
-        
-        let layout: UICollectionViewFlowLayout = UICollectionViewFlowLayout()
-        layout.sectionInset = UIEdgeInsets(top: 4, left: 4, bottom: 4, right: 4)
-        layout.itemSize = CGSize(width: screenWidth/2.35, height: screenHeight/2.4)
-        layout.minimumInteritemSpacing = 0
-        layout.minimumLineSpacing = 0
-        
-        titleCollectionView!.collectionViewLayout = layout
+  
         
         backimage2.layer.cornerRadius = 10.0
         backimage2.clipsToBounds = true
@@ -756,7 +448,7 @@ class DepressionViewController: UIViewController, UICollectionViewDelegate, UICo
             
             
             let name = book?.name
-            let author = book?.author
+            let author = book?.genre
             let publisheddate = book?.date ?? "2020-03-31 14:37:21"
             
             let dateFormatter = DateFormatter()

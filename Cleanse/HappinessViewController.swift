@@ -1042,31 +1042,31 @@ func timeAgoSinceDate() -> String {
     // Estimation
     // Year
     if let interval = Calendar.current.dateComponents([.year], from: fromDate, to: toDate).year, interval > 0  {
-//
-        return "26"
+
+        return interval == 1 ? "\(interval)" + " " + "year ago" : "\(interval)" + " " + "years ago"
     }
-//
-//    // Month
+
+    // Month
     if let interval = Calendar.current.dateComponents([.month], from: fromDate, to: toDate).month, interval > 0  {
-//
-        return "26"
+
+        return interval == 1 ? "\(interval)" + " " + "month ago" : "\(interval)" + " " + "months ago"
     }
-//
-//    // Day
+
+    // Day
     if let interval = Calendar.current.dateComponents([.day], from: fromDate, to: toDate).day, interval > 0  {
 
-        return "26"
+        return interval == 1 ? "\(interval)" + " " + "day ago" : "\(interval)" + " " + "days ago"
     }
 
     // Hours
     if let interval = Calendar.current.dateComponents([.hour], from: fromDate, to: toDate).hour, interval > 0 {
 
-        return interval == 1 ? "\(interval)" + " " + " " : "\(interval)" + " "
+        return interval == 1 ? "\(interval)" + " " + "hour ago" : "\(interval)" + " " + "hours ago"
     }
 
     if let interval = Calendar.current.dateComponents([.minute], from: fromDate, to: toDate).minute, interval > 0 {
 
-        return "2"
+        return interval == 1 ? "\(interval)" + " " + "minute ago" : "\(interval)" + " " + "minutes ago"
     }
 
     return "a moment ago"

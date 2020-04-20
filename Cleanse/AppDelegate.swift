@@ -24,7 +24,7 @@ var monthdate = String()
 var dayweek = String()
 
 @UIApplicationMain
-class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterDelegate, AppsFlyerTrackerDelegate {
+class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate {
     func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
         print("success")
     }
@@ -61,8 +61,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate, UNUserNotificationCenterD
         name: UIApplication.didBecomeActiveNotification, //.UIApplicationDidBecomeActive for Swift < 4.2
         object: nil)
         
-        let center = UNUserNotificationCenter.current()
-        center.delegate = self
+  
         
         Purchases.debugLogsEnabled = true
         Purchases.configure(withAPIKey: "paCLaBYrGELMfdxuMQqbROxMfgDbcGGn", appUserID: nil)
