@@ -51,6 +51,32 @@ class HomeTabViewController: UITabBarController {
         mtab.backgroundColor = UIColor.clear
               mtab.backgroundImage = UIImage()
               mtab.shadowImage = UIImage()
+        
+        if selectedgenre == "Relationships" {
+            
+            self.selectedIndex = 2
+
+        }
+        
+        if selectedgenre == "Money" {
+                   
+                   self.selectedIndex = 0
+
+               }
+        
+        if selectedgenre == "Depression" {
+                   
+                   self.selectedIndex = 1
+
+               }
+        
+        if selectedgenre == "Exercise" {
+                   
+                   self.selectedIndex = 3
+
+               }
+        
+        onboarding = false
  
         
 //    tabBar.isTranslucent = true

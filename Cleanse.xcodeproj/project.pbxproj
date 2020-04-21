@@ -15,6 +15,8 @@
 		9D0663B02367B3AA00385DEE /* Summary.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0663AE2367B3A900385DEE /* Summary.swift */; };
 		9D0663B12367B3AA00385DEE /* Audio.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0663AB2367B3A900385DEE /* Audio.swift */; };
 		9D0663B22367B3AA00385DEE /* PaywallConfigurationVariant.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D0663AD2367B3A900385DEE /* PaywallConfigurationVariant.swift */; };
+		9D19298B244E92D7005C1B28 /* Onboarding1ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19298A244E92D6005C1B28 /* Onboarding1ViewController.swift */; };
+		9D19298D244E92ED005C1B28 /* Onboarding2ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D19298C244E92ED005C1B28 /* Onboarding2ViewController.swift */; };
 		9D2D42562373360A003E21C1 /* EntriesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2D42552373360A003E21C1 /* EntriesViewController.swift */; };
 		9D2E8F0523C006EB0012AA3E /* TextHomeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D2E8F0423C006EB0012AA3E /* TextHomeViewController.swift */; };
 		9D328D0823651A92003768CF /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 9D328D0723651A92003768CF /* GoogleService-Info.plist */; };
@@ -39,6 +41,7 @@
 		9D83FCD22434E9D200A1C759 /* ForYouViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D83FCD12434E9D200A1C759 /* ForYouViewController.swift */; };
 		9D8B7761244D2FEB00D2A3F7 /* QuotesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8B7760244D2FEB00D2A3F7 /* QuotesTableViewCell.swift */; };
 		9D8C534D24201FA9004F35C7 /* ConsumeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D8C534C24201FA9004F35C7 /* ConsumeViewController.swift */; };
+		9D98AA03244F3B5B00141C2D /* Onboarding3ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9D98AA02244F3B5B00141C2D /* Onboarding3ViewController.swift */; };
 		9DCEB53823DE0FBF00546242 /* FavoritesViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */; };
 		9DD64A2D2376073000F159E5 /* FreeToPlayViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */; };
 		9DD64A2F23760A1D00F159E5 /* HomeTabViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */; };
@@ -83,6 +86,8 @@
 		9D0663AC2367B3A900385DEE /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
 		9D0663AD2367B3A900385DEE /* PaywallConfigurationVariant.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PaywallConfigurationVariant.swift; sourceTree = "<group>"; };
 		9D0663AE2367B3A900385DEE /* Summary.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Summary.swift; sourceTree = "<group>"; };
+		9D19298A244E92D6005C1B28 /* Onboarding1ViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Onboarding1ViewController.swift; sourceTree = "<group>"; };
+		9D19298C244E92ED005C1B28 /* Onboarding2ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding2ViewController.swift; sourceTree = "<group>"; };
 		9D2D42552373360A003E21C1 /* EntriesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EntriesViewController.swift; sourceTree = "<group>"; };
 		9D2E8F0423C006EB0012AA3E /* TextHomeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextHomeViewController.swift; sourceTree = "<group>"; };
 		9D328D0723651A92003768CF /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
@@ -113,6 +118,7 @@
 		9D83FCD12434E9D200A1C759 /* ForYouViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ForYouViewController.swift; sourceTree = "<group>"; };
 		9D8B7760244D2FEB00D2A3F7 /* QuotesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = QuotesTableViewCell.swift; sourceTree = "<group>"; };
 		9D8C534C24201FA9004F35C7 /* ConsumeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConsumeViewController.swift; sourceTree = "<group>"; };
+		9D98AA02244F3B5B00141C2D /* Onboarding3ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Onboarding3ViewController.swift; sourceTree = "<group>"; };
 		9DCEB53723DE0FBF00546242 /* FavoritesViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoritesViewController.swift; sourceTree = "<group>"; };
 		9DD64A2C2376073000F159E5 /* FreeToPlayViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FreeToPlayViewController.swift; sourceTree = "<group>"; };
 		9DD64A2E23760A1D00F159E5 /* HomeTabViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeTabViewController.swift; sourceTree = "<group>"; };
@@ -198,6 +204,8 @@
 		9D7360E5236513DC00DC6ACB /* Cleanse */ = {
 			isa = PBXGroup;
 			children = (
+				9D19298C244E92ED005C1B28 /* Onboarding2ViewController.swift */,
+				9D19298A244E92D6005C1B28 /* Onboarding1ViewController.swift */,
 				9DE1C832243139A000F73A0C /* Motivation.entitlements */,
 				9D7360E6236513DC00DC6ACB /* AppDelegate.swift */,
 				9D328D0923651B26003768CF /* Main.storyboard */,
@@ -222,6 +230,7 @@
 				9D328D1D23665959003768CF /* GenreCollectionViewCell.swift */,
 				9D328D132365F5F0003768CF /* LikesViewController.swift */,
 				9D7360EC236513DE00DC6ACB /* Assets.xcassets */,
+				9D98AA02244F3B5B00141C2D /* Onboarding3ViewController.swift */,
 				9D328D15236628E9003768CF /* PaywallViewController.swift */,
 				9D328D1723662923003768CF /* AudioViewController.swift */,
 				9D328D1923662937003768CF /* TextViewController.swift */,
@@ -536,7 +545,9 @@
 				9D328D122365F5DC003768CF /* DiscoverViewController.swift in Sources */,
 				9D2D42562373360A003E21C1 /* EntriesViewController.swift in Sources */,
 				9DE8FCE3242469980035E3DA /* LoveViewController.swift in Sources */,
+				9D98AA03244F3B5B00141C2D /* Onboarding3ViewController.swift in Sources */,
 				9DCEB53823DE0FBF00546242 /* FavoritesViewController.swift in Sources */,
+				9D19298D244E92ED005C1B28 /* Onboarding2ViewController.swift in Sources */,
 				9DF6E6F023AC8B6E00DCB973 /* DepressionViewController.swift in Sources */,
 				9DEF34D5236BBEFB003A3A41 /* HomeViewController.swift in Sources */,
 				9D0663B22367B3AA00385DEE /* PaywallConfigurationVariant.swift in Sources */,
@@ -544,6 +555,7 @@
 				9DF6E6EE23AC8B6300DCB973 /* SleepViewController.swift in Sources */,
 				9D0663B12367B3AA00385DEE /* Audio.swift in Sources */,
 				9D2E8F0523C006EB0012AA3E /* TextHomeViewController.swift in Sources */,
+				9D19298B244E92D7005C1B28 /* Onboarding1ViewController.swift in Sources */,
 				9D328D1C2366593C003768CF /* TitleCollectionViewCell.swift in Sources */,
 				9D328D16236628E9003768CF /* PaywallViewController.swift in Sources */,
 				9DE8FCE7242469DB0035E3DA /* HappinessViewController.swift in Sources */,

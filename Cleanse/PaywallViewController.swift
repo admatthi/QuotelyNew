@@ -13,6 +13,7 @@ import FBSDKCoreKit
 import AppsFlyerLib
 
 var refer = String()
+var onboarding = Bool()
 
 @objc protocol SwiftPaywallDelegate {
     func purchaseCompleted(paywall: PaywallViewController, transaction: SKPaymentTransaction, purchaserInfo: Purchases.PurchaserInfo)
@@ -65,7 +66,16 @@ class PaywallViewController: UIViewController {
     }
     @IBAction func tapBack(_ sender: Any) {
         
-        self.dismiss(animated: true, completion: nil)
+        if onboarding {
+            
+            self.performSegue(withIdentifier: "PaywallToTab", sender: self)
+
+        } else {
+            
+            self.dismiss(animated: true, completion: nil)
+
+        }
+        
     }
     @IBOutlet weak var backimage: UIImageView!
     @IBAction func tapContinue(_ sender: Any) {

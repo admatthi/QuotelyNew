@@ -266,14 +266,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidAppear(_ animated: Bool) {
         
-        
-        
-        
-        
-        
-        
-        
-        
+        tableView.setContentOffset(.zero, animated: false)
+
     }
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
@@ -288,6 +282,72 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
 
           }
     
+
+      @objc func tapLike(sender: UIButton) {
+
+          let generator = UIImpactFeedbackGenerator(style: .heavy)
+          generator.impactOccurred()
+
+          let book = self.book(atIndex: sender.tag)
+          let author = book?.genre
+          let name = book?.headline1
+          let imageURL = book?.imageURL
+          let bookID = book?.bookID
+
+          if let index = wishlistids.index(of: bookID!) {
+
+              wishlistids.remove(at: index)
+
+            ref?.child(uid).child("Favorites").child(bookID ?? "").removeValue()
+
+              tableView.reloadData()
+
+          } else {
+
+            ref?.child(uid).child("Favorites").child(bookID ?? "").updateChildValues(["Author": author, "Name": name, "Image": imageURL])
+
+              wishlistids.append(bookID!)
+
+              tableView.reloadData()
+
+    
+          }
+
+      }
+    
+    func queryforwishlists() {
+
+        wishlistids.removeAll()
+        
+        var functioncounter = 0
+
+        ref?.child(uid).child("Favorites").observeSingleEvent(of: .value, with: { (snapshot) in
+
+            var value = snapshot.value as? NSDictionary
+
+            print (value)
+
+            if let snapDict = snapshot.value as? [String: AnyObject] {
+
+                for each in snapDict {
+
+                    let ids = each.key
+
+                    wishlistids.append(ids)
+
+                    functioncounter += 1
+
+                    if functioncounter == snapDict.count {
+
+                        self.tableView.reloadData()
+                    }
+
+                }
+            }
+        })
+
+    }
+    
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         
         
@@ -299,31 +359,50 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.author.text = book?.genre
         cell.quote.text = book?.headline1
         
-        cell.selectionStyle = .none
-              let dateFormatter = DateFormatter()
-              dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        cell.taplike.tag = indexPath.row
         
- 
-                   let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-                   
-                   dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-                   let date = dateFormatter.date(from:publisheddate)!
-                   
-                   let dateago = date.timeAgoSinceDate()
-                   
-                   
+        cell.taplike.addTarget(self, action: #selector(DepressionViewController.tapLike), for: .touchUpInside)
+        
+        let backgroundcounter = Int.random(in: 1..<20)
+
+        cell.likesnumber.text = "\(backgroundcounter)K"
+        
+        cell.selectionStyle = .none
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        
+        
+        let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+        
+        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+        let date = dateFormatter.date(from:publisheddate)!
+        
+        let dateago = date.timeAgoSinceDate()
+        
+        
         cell.datelabel.text = dateago
         
-//        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
-//
-//
-//
-//        let today = Date()
-//        dateFormatter.dateFormat = "MMM dd"
-//        let datestring = dateFormatter.string(from: result ?? today)
-//
-//        cell.datelabel.text = datestring
+        if wishlistids.contains(book!.bookID) {
+            
+            cell.likesimage.image = UIImage(named: "WriteSmall Copy 6")
 
+            
+        } else {
+            
+            cell.likesimage.image = UIImage(named: "WriteSmall Copy 5")
+
+        }
+        
+        //        let result = dateFormatter.date(from: book?.date ?? "Apr 3")
+        //
+        //
+        //
+        //        let today = Date()
+        //        dateFormatter.dateFormat = "MMM dd"
+        //        let datestring = dateFormatter.string(from: result ?? today)
+        //
+        //        cell.datelabel.text = datestring
+        
         
         if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
             
@@ -343,6 +422,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         let swipeUpRec = UISwipeGestureRecognizer()
         let swipeDownRec = UISwipeGestureRecognizer()
         let swipeRightRec = UISwipeGestureRecognizer()
+        
+        queryforwishlists()
         
         //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
         //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
@@ -379,6 +460,7 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
             
         }
         
+        queryforwishlists()
         
         
         
@@ -712,14 +794,12 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                 } else {
                     
                     didpurchase = false
-                    self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
                     
                 }
                 
             } else {
                 
                 didpurchase = false
-                self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
             }
             
         })
@@ -823,6 +903,7 @@ func slideInFromTop(duration: TimeInterval = 0.5, completionDelegate: AnyObject?
         // Add the animation to the View's layer
         self.layer.add(slideInFromLeftTransition, forKey: "slideInFromLeftTransition")
     }
+    
     
     
   
