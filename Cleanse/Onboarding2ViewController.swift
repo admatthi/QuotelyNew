@@ -8,38 +8,65 @@
 
 import UIKit
 import FBSDKCoreKit
+import FirebaseCore
+import Firebase
+
+var onboardinggenre = String()
 
 class Onboarding2ViewController: UIViewController {
 
+    func logGenrePicked(referrer : String) {
+          AppEvents.logEvent(AppEvents.Name(rawValue: "picked genre"), parameters: ["genre" : onboardinggenre])
+      }
+    
     @IBAction func tapFour(_ sender: Any) {
         
-        selectedgenre = "Exercise"
+        
+        onboardinggenre = "Exercise"
  
+        logGenrePicked(referrer: onboardinggenre)
+        
+        ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
+
         self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
         
 
     }
     
     @IBAction func tapThree(_ sender: Any) {
-       selectedgenre = "Depression"
+       onboardinggenre = "Depression"
         
+        logGenrePicked(referrer: onboardinggenre)
+        
+        ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
+
         self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
     }
     @IBAction func tapTwo(_ sender: Any) {
         
-        selectedgenre = "Relationships"
+        onboardinggenre = "Relationships"
         
+        logGenrePicked(referrer: onboardinggenre)
+        
+        ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
+
         self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
     }
     @IBAction func tapOne(_ sender: Any) {
         
-        selectedgenre = "Money"
+        onboardinggenre = "Money"
         
+        logGenrePicked(referrer: onboardinggenre)
+        
+        ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
+
         self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        ref = Database.database().reference()
+
         onboarding = true
 
         // Do any additional setup after loading the view.

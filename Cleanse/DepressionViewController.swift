@@ -74,6 +74,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
     @IBOutlet weak var tableView: UITableView!
     func tableView(_ tableView: UITableView, didSelectItemAt indexPath: IndexPath) {
         
+        
+        
         refer = "On Tap Discover"
         counter = 0
         let generator = UIImpactFeedbackGenerator(style: .heavy)
@@ -165,26 +167,17 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                     
                     
                 }}))
-            
-            if indexPath.row > 4 {
-                
+                            
                 if didpurchase {
                     
-                    self.performSegue(withIdentifier: "MoneyToRead", sender: self)
                     
                     
                 } else {
                     
                     
-                    self.performSegue(withIdentifier: "MoneyToRead", sender: self)
+                    self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
                     
                 }
-            } else {
-                
-                self.performSegue(withIdentifier: "MoneyToRead", sender: self)
-            }
-            
-            
             
             
             
@@ -355,7 +348,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         let book = self.book(atIndexPath: indexPath)
         
         let cell = tableView.dequeueReusableCell(withIdentifier: "Quotes", for: indexPath) as! QuotesTableViewCell
-        
+        cell.selectionStyle = .none
+        if didpurchase || onboardinggenre == selectedgenre {
         cell.author.text = book?.genre
         cell.quote.text = book?.headline1
         
@@ -368,19 +362,7 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         cell.likesnumber.text = "\(backgroundcounter)K"
         
         cell.selectionStyle = .none
-        let dateFormatter = DateFormatter()
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        
-        
-        let publisheddate = book?.date ?? "2020-03-31 14:37:21"
-        
-        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
-        let date = dateFormatter.date(from:publisheddate)!
-        
-        let dateago = date.timeAgoSinceDate()
-        
-        
-        cell.datelabel.text = dateago
+  
         
         if wishlistids.contains(book!.bookID) {
             
@@ -409,6 +391,36 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
             cell.profilepic.kf.setImage(with: imageUrl)
             
         }//
+            cell.blurimage.alpha = 0
+            
+        } else {
+            
+            cell.likesimage.alpha = 0
+            cell.blurimage.alpha = 1
+            
+            if let imageURLString = book?.imageURL, let imageUrl = URL(string: imageURLString) {
+                       
+                       cell.profilepic.kf.setImage(with: imageUrl)
+                       
+                   }//
+            
+            let dateFormatter = DateFormatter()
+              dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+              
+              
+              let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+              
+              dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+              let date = dateFormatter.date(from:publisheddate)!
+              
+              let dateago = date.timeAgoSinceDate()
+              
+              cell.author.text = book?.genre
+              cell.datelabel.text = dateago
+            cell.quote.text = ""
+            cell.likesnumber.text = ""
+            
+        }
         
         return cell
         
@@ -493,8 +505,18 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         
         bookmarktapped = false
         
+
+
         
         // Do any additional setup after loading the view.
+    }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
+        
+        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
+        print(deviceTokenString)
+        
+        
     }
     
     var backgroundcounter = Int()
@@ -784,6 +806,14 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         ref?.child("Users").child(uid).observeSingleEvent(of: .value, with: { (snapshot) in
             
             let value = snapshot.value as? NSDictionary
+            
+            if let purchased2 = value?["Onboarding"] as? String {
+                
+                onboardinggenre = purchased2
+            } else {
+                
+                onboardinggenre = "Relationships"
+            }
             
             if let purchased = value?["Purchased"] as? String {
                 

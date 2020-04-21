@@ -11,6 +11,7 @@ pod 'Firebase/Database'
 pod 'Firebase/Storage'
 pod 'Purchases'
 pod 'FBSDKCoreKit'
+pod 'Firebase/Messaging'
 pod 'AppsFlyerFramework'
 
   # Pods for Cleanse

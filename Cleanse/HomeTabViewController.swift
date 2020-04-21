@@ -52,30 +52,31 @@ class HomeTabViewController: UITabBarController {
               mtab.backgroundImage = UIImage()
               mtab.shadowImage = UIImage()
         
-        if selectedgenre == "Relationships" {
+        if onboardinggenre == "Relationships" {
             
             self.selectedIndex = 2
 
         }
         
-        if selectedgenre == "Money" {
+        if onboardinggenre == "Money" {
                    
                    self.selectedIndex = 0
 
                }
         
-        if selectedgenre == "Depression" {
+        if onboardinggenre == "Depression" {
                    
                    self.selectedIndex = 1
 
                }
         
-        if selectedgenre == "Exercise" {
+        if onboardinggenre == "Exercise" {
                    
                    self.selectedIndex = 3
 
                }
         
+    
         onboarding = false
  
         
