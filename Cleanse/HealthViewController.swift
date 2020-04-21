@@ -68,8 +68,8 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
             
         }
         @IBOutlet weak var tableView: UITableView!
-        func tableView(_ tableView: UITableView, didSelectItemAt indexPath: IndexPath) {
-            
+        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
             
             
             refer = "On Tap Discover"
@@ -171,7 +171,7 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
                     } else {
                         
                         
-                        self.performSegue(withIdentifier: "HappyToSale", sender: self)
+                        self.performSegue(withIdentifier: "HealthToSale1", sender: self)
                         
                     }
                 
@@ -254,17 +254,13 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
         }
         
         override func viewDidAppear(_ animated: Bool) {
-            
+            selectedgenre = genres[0]
+
             tableView.setContentOffset(.zero, animated: false)
 
         }
         
-        func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-            
-            
-        }
-        
         func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                   
               return books.count
@@ -274,6 +270,7 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
 
           @objc func tapLike(sender: UIButton) {
 
+            if didpurchase {
               let generator = UIImpactFeedbackGenerator(style: .heavy)
               generator.impactOccurred()
 
@@ -301,6 +298,12 @@ class HealthViewController: UIViewController, UITableViewDataSource, UITableView
 
         
               }
+                
+            } else {
+                
+                self.performSegue(withIdentifier: "HealthToSale1", sender: self)
+
+            }
 
           }
         

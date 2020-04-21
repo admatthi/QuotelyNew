@@ -72,8 +72,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         
     }
     @IBOutlet weak var tableView: UITableView!
-    func tableView(_ tableView: UITableView, didSelectItemAt indexPath: IndexPath) {
-        
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
         
         
         refer = "On Tap Discover"
@@ -259,15 +259,15 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
     
     override func viewDidAppear(_ animated: Bool) {
         
+        tableView.reloadData()
+        
+        selectedgenre = genres[0]
+
         tableView.setContentOffset(.zero, animated: false)
 
     }
     
-    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-        
-        
-    }
+ 
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
               
@@ -277,6 +277,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
     
 
       @objc func tapLike(sender: UIButton) {
+        
+        if didpurchase {
 
           let generator = UIImpactFeedbackGenerator(style: .heavy)
           generator.impactOccurred()
@@ -305,6 +307,12 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
 
     
           }
+            
+        } else {
+            
+            self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+
+        }
 
       }
     

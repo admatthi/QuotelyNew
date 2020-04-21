@@ -73,8 +73,10 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
           
       }
       @IBOutlet weak var tableView: UITableView!
-      func tableView(_ tableView: UITableView, didSelectItemAt indexPath: IndexPath) {
-          
+    
+ 
+      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
           
           
           refer = "On Tap Discover"
@@ -176,7 +178,7 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
                   } else {
                       
                       
-                      self.performSegue(withIdentifier: "DiscoverToSale2", sender: self)
+                      self.performSegue(withIdentifier: "HappyToSale", sender: self)
                       
                   }
               
@@ -259,16 +261,12 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
       }
       
       override func viewDidAppear(_ animated: Bool) {
-          
+          selectedgenre = genres[0]
+
           tableView.setContentOffset(.zero, animated: false)
 
       }
-      
-      func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
 
-          
-          
-      }
       
       func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                 
@@ -279,6 +277,7 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
 
         @objc func tapLike(sender: UIButton) {
 
+            if didpurchase {
             let generator = UIImpactFeedbackGenerator(style: .heavy)
             generator.impactOccurred()
 
@@ -305,6 +304,12 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
                 tableView.reloadData()
 
       
+            }
+                
+            } else {
+                
+                self.performSegue(withIdentifier: "HappyToSale", sender: self)
+
             }
 
         }

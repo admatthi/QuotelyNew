@@ -70,8 +70,8 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            
        }
        @IBOutlet weak var tableView: UITableView!
-       func tableView(_ tableView: UITableView, didSelectItemAt indexPath: IndexPath) {
-           
+       func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+
            
            
            refer = "On Tap Discover"
@@ -257,15 +257,12 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
        
        override func viewDidAppear(_ animated: Bool) {
            
+        selectedgenre = genres[0]
+
            tableView.setContentOffset(.zero, animated: false)
 
        }
-       
-       func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-
-           
-           
-       }
+   
        
        func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
                  
@@ -276,6 +273,7 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
          @objc func tapLike(sender: UIButton) {
 
+            if didpurchase {
              let generator = UIImpactFeedbackGenerator(style: .heavy)
              generator.impactOccurred()
 
@@ -303,6 +301,12 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
 
        
              }
+                
+            } else {
+                
+                self.performSegue(withIdentifier: "LoveToSale", sender: self)
+
+            }
 
          }
        
@@ -347,6 +351,8 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            
            let cell = tableView.dequeueReusableCell(withIdentifier: "Quotes", for: indexPath) as! QuotesTableViewCell
            cell.selectionStyle = .none
+        
+        
            if didpurchase || onboardinggenre == selectedgenre {
            cell.author.text = book?.genre
            cell.quote.text = book?.headline1
