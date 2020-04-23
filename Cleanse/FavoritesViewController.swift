@@ -234,7 +234,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
            }
     @IBAction func tapTerms(_ sender: Any) {
         
-        if let url = NSURL(string: "https://www.aktechnology.info/privacy-policy.html"
+        if let url = NSURL(string: "https://www.aktechnology.info/terms.html"
                 ) {
                 UIApplication.shared.openURL(url as URL)
             }
@@ -248,6 +248,7 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
             }
             
     }
+    
     func addstaticbooks() {
                
                var counter2 = 0

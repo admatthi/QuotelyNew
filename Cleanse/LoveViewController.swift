@@ -345,6 +345,47 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
     func quoteViewed(id : String) {
             AppEvents.logEvent(AppEvents.Name(rawValue: "quote viewed"), parameters: ["referrer" : referrer, "quoteid" : id])
         }
+    
+    func tableView(_ tableView: UITableView, canEditRowAt indexPath: IndexPath) -> Bool {
+
+        if uid == "4720C68F-8F1D-4E31-BEDE-461FE05B2AAB" {
+            
+            return true
+
+        } else {
+            
+            return false
+        }
+    }
+
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCell.EditingStyle, forRowAt indexPath: IndexPath) {
+
+        if uid == "4720C68F-8F1D-4E31-BEDE-461FE05B2AAB" {
+
+        
+        
+        if (editingStyle == .delete) {
+            
+            
+
+            let book = self.book(atIndexPath: indexPath)
+
+            let id2 = book?.bookID ?? "aklsdf"
+            
+            
+            ref?.child("AllBooks1").child(selectedgenre).child(id2).removeValue()
+            books.remove(at: indexPath.row)
+            
+            print(uid)
+            
+            // handle delete (by removing the data from your array and updating the tableview)
+        }
+            
+        } else {
+            
+            
+        }
+    }
        
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            
@@ -462,17 +503,17 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            
            queryforwishlists()
            
-                               let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-                                  let blurEffectView = UIVisualEffectView(effect: blurEffect)
-                                  blurEffectView.frame = backimage2.bounds
-                                  blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-           
-                               backimage2.addSubview(blurEffectView)
+//                               let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+//                                  let blurEffectView = UIVisualEffectView(effect: blurEffect)
+//                                  blurEffectView.frame = backimage2.bounds
+//                                  blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+//           
+//                               backimage2.addSubview(blurEffectView)
            //
       
            
-           backimage2.layer.cornerRadius = 10.0
-           backimage2.clipsToBounds = true
+           tableView.layer.cornerRadius = 10.0
+           tableView.clipsToBounds = true
            
            self.view!.addGestureRecognizer(swipeLeftRec)
            
@@ -508,10 +549,7 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            
            dateformat = result
            
-     
-           
-           backimage2.layer.cornerRadius = 10.0
-           backimage2.clipsToBounds = true
+  
            
            
            
