@@ -8,6 +8,7 @@
 
 import UIKit
 import Firebase
+import UserNotifications
 import Kingfisher
 import FirebaseDatabase
 import FirebaseStorage
@@ -26,12 +27,12 @@ var dayweek = String()
 
 @UIApplicationMain
 class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate, UNUserNotificationCenterDelegate, MessagingDelegate {
+    
+    let gcmMessageIDKey = "gcm.message_id"
+    
     func onConversionDataSuccess(_ conversionInfo: [AnyHashable : Any]) {
         print("success")
     }
-    
-    
-    
     
     func onConversionDataFail(_ error: Error) {
         print("\(error)")
@@ -91,8 +92,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate,
         
         dayweek = String(weekday)
         
-        
-        
         let launchedBefore = UserDefaults.standard.bool(forKey: "launchedBefore")
         
         if launchedBefore {
@@ -121,47 +120,87 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate,
         
         Messaging.messaging().delegate = self
 
-//        if #available(iOS 10.0, *) {
-//          // For iOS 10 display notification (sent via APNS)
-//          UNUserNotificationCenter.current().delegate = self
-//
-//          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
-//          UNUserNotificationCenter.current().requestAuthorization(
-//            options: authOptions,
-//            completionHandler: {_, _ in })
-//        } else {
-//          let settings: UIUserNotificationSettings =
-//          UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
-//          application.registerUserNotificationSettings(settings)
-//        }
-//
-//        application.registerForRemoteNotifications()
-        
+        if #available(iOS 10.0, *) {
+          // For iOS 10 display notification (sent via APNS)
+          UNUserNotificationCenter.current().delegate = self
+
+          let authOptions: UNAuthorizationOptions = [.alert, .badge, .sound]
+          UNUserNotificationCenter.current().requestAuthorization(
+            options: authOptions,
+            completionHandler: {_, _ in })
+        } else {
+          let settings: UIUserNotificationSettings =
+          UIUserNotificationSettings(types: [.alert, .badge, .sound], categories: nil)
+          application.registerUserNotificationSettings(settings)
+        }
+
+        application.registerForRemoteNotifications()
+
         return true
     }
     
+    // [START receive_message]
+      func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any]) {
+          // If you are receiving a notification message while your app is in the background,
+          // this callback will not be fired till the user taps on the notification launching the application.
+          // TODO: Handle data of notification
+          
+          // With swizzling disabled you must let Messaging know about the message, for Analytics
+          // Messaging.messaging().appDidReceiveMessage(userInfo)
+          
+          // Print message ID.
+          if let messageID = userInfo[gcmMessageIDKey] {
+              print("Message ID: \(messageID)")
+          }
+          
+          // Print full message.
+          print(userInfo)
+      }
+      
+      func application(_ application: UIApplication, didReceiveRemoteNotification userInfo: [AnyHashable: Any],
+                       fetchCompletionHandler completionHandler: @escaping (UIBackgroundFetchResult) -> Void) {
+          // If you are receiving a notification message while your app is in the background,
+          // this callback will not be fired till the user taps on the notification launching the application.
+          // TODO: Handle data of notification
+          
+          // With swizzling disabled you must let Messaging know about the message, for Analytics
+          // Messaging.messaging().appDidReceiveMessage(userInfo)
+          
+          // Print message ID.
+          if let messageID = userInfo[gcmMessageIDKey] {
+              print("Message ID: \(messageID)")
+          }
+          
+          // Print full message.
+          print(userInfo)
+          
+          completionHandler(UIBackgroundFetchResult.newData)
+      }
+      // [END receive_message]
     
-    
-    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken: Data) {
-        
-        let deviceTokenString = deviceToken.reduce("", {$0 + String(format: "%02X", $1)})
-        print(deviceTokenString)
-        
-        
+    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
+        print("Unable to register for remote notifications: \(error.localizedDescription)")
     }
+    
+    func application(_ application: UIApplication, didRegisterForRemoteNotificationsWithDeviceToken deviceToken:Data) {
+        print("did register device token")
+    }
+    
     
     func messaging(_ messaging: Messaging, didReceiveRegistrationToken fcmToken: String) {
       print("Firebase registration token: \(fcmToken)")
 
       let dataDict:[String: String] = ["token": fcmToken]
       NotificationCenter.default.post(name: Notification.Name("FCMToken"), object: nil, userInfo: dataDict)
+        
+      if let currentUserUID = UIDevice.current.identifierForVendor?.uuidString {
+         let ref = Database.database().reference().child("Users").child(currentUserUID).child("pushToken")
+         ref.setValue(fcmToken)
+         Database.database().reference().child("pushTokens").updateChildValues([currentUserUID: fcmToken])
+      }
+        
       // TODO: If necessary send token to application server.
       // Note: This callback is fired at each app startup and whenever a new token is generated.
-    }
-    
-    func application(_ application: UIApplication, didFailToRegisterForRemoteNotificationsWithError error: Error) {
-        
-        print("i am not available in simulator \(error)")
     }
     
     func queryforpaywall() {
@@ -169,8 +208,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate,
         ref?.child("Users").observeSingleEvent(of: .value, with: { (snapshot) in
             
             let value = snapshot.value as? NSDictionary
-            
-            
             
             if let slimey = value?["Slimey"] as? String {
                 
@@ -202,6 +239,8 @@ class AppDelegate: UIResponder, UIApplicationDelegate, AppsFlyerTrackerDelegate,
     
     
 }
+
+
 
 
 
