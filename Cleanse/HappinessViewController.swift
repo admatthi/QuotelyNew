@@ -173,7 +173,7 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
                               
                   if didpurchase {
                       
-                      
+                    self.performSegue(withIdentifier: "HappinessToRead", sender: self)
                       
                   } else {
                       
@@ -346,6 +346,9 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
           })
 
       }
+    func quoteViewed(id : String) {
+               AppEvents.logEvent(AppEvents.Name(rawValue: "quote viewed"), parameters: ["referrer" : referrer, "quoteid" : id])
+           }
       
       func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
           
@@ -368,8 +371,26 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
           cell.likesnumber.text = "\(backgroundcounter)K"
           
           cell.selectionStyle = .none
+            
+            var bookiddata = book?.bookID ?? "x"
+                           
+                       quoteViewed(id: bookiddata)
+              
     
-          
+          let dateFormatter = DateFormatter()
+                       dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                       
+                       
+                       let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                       
+                       dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                       let date = dateFormatter.date(from:publisheddate)!
+                       
+                       let dateago = date.timeAgoSinceDate()
+                       
+                       cell.author.text = book?.genre
+                       cell.datelabel.text = dateago
+            
           if wishlistids.contains(book!.bookID) {
               
               cell.likesimage.image = UIImage(named: "WriteSmall Copy 6")
@@ -443,12 +464,12 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
           
           queryforwishlists()
           
-          //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-          //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
-          //                       blurEffectView.frame = backimage2.bounds
-          //                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-          //
-          //                    backimage2.addSubview(blurEffectView)
+                              let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+                                 let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                                 blurEffectView.frame = backimage2.bounds
+                                 blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+          
+                              backimage2.addSubview(blurEffectView)
           //
      
           
@@ -511,7 +532,7 @@ class HappinessViewController: UIViewController, UITableViewDelegate, UITableVie
           
           bookmarktapped = false
           
-
+            referrer = "Money Tapped Blur"
 
           
           // Do any additional setup after loading the view.

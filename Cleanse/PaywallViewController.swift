@@ -66,7 +66,10 @@ class PaywallViewController: UIViewController {
     }
     @IBAction func tapBack(_ sender: Any) {
         
+        referrer = "Paywall"
+
         if onboarding {
+            
             
             self.performSegue(withIdentifier: "PaywallToTab", sender: self)
 
@@ -102,7 +105,7 @@ class PaywallViewController: UIViewController {
                       if let purchaseCompletedHandler = self.delegate?.purchaseCompleted {
                           purchaseCompletedHandler(self, trans!, info!)
                           
-                          self.logPurchaseSuccessEvent(referrer : refer)
+                          self.logPurchaseSuccessEvent(referrer : referrer)
                           //
                           ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
                           
@@ -120,7 +123,7 @@ class PaywallViewController: UIViewController {
                           
                       } else {
                           
-                          self.logPurchaseSuccessEvent(referrer : refer)
+                          self.logPurchaseSuccessEvent(referrer : referrer)
                           //
                           ref?.child("Users").child(uid).updateChildValues(["Purchased" : "True"])
                           
@@ -134,7 +137,7 @@ class PaywallViewController: UIViewController {
     
     @IBAction func tapTerms(_ sender: Any) {
         
-        if let url = NSURL(string: "https://www.aktechnology.info/privacy-policy.html"
+        if let url = NSURL(string: "https://www.aktechnology.info/terms.html"
             ) {
             UIApplication.shared.openURL(url as URL)
         }
@@ -158,7 +161,8 @@ class PaywallViewController: UIViewController {
         
         tapcontinue.clipsToBounds = true
         
-        logPaywallShownEvent(referrer : refer)
+        logPaywallShownEvent(referrer : referrer)
+        
         
         queryforpaywall()
         

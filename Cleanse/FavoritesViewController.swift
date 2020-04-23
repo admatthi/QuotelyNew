@@ -232,7 +232,23 @@ class FavoritesViewController: UIViewController, UITableViewDelegate, UITableVie
                textField?.placeholder = "Promo Code"
                
            }
-           func addstaticbooks() {
+    @IBAction func tapTerms(_ sender: Any) {
+        
+        if let url = NSURL(string: "https://www.aktechnology.info/privacy-policy.html"
+                ) {
+                UIApplication.shared.openURL(url as URL)
+            }
+            
+    }
+    @IBAction func tapPrivacy(_ sender: Any) {
+        
+        if let url = NSURL(string: "https://www.aktechnology.info/privacy-policy.html"
+                ) {
+                UIApplication.shared.openURL(url as URL)
+            }
+            
+    }
+    func addstaticbooks() {
                
                var counter2 = 0
                

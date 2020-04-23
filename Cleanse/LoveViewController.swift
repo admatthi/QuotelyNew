@@ -168,7 +168,7 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
                                
                    if didpurchase {
                        
-                       
+                    self.performSegue(withIdentifier: "LoveToRead5", sender: self)
                        
                    } else {
                        
@@ -342,6 +342,9 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            })
 
        }
+    func quoteViewed(id : String) {
+            AppEvents.logEvent(AppEvents.Name(rawValue: "quote viewed"), parameters: ["referrer" : referrer, "quoteid" : id])
+        }
        
        func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
            
@@ -366,8 +369,25 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            cell.likesnumber.text = "\(backgroundcounter)K"
            
            cell.selectionStyle = .none
+            
+            var bookiddata = book?.bookID ?? "x"
+                  
+              quoteViewed(id: bookiddata)
      
-           
+           let dateFormatter = DateFormatter()
+                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        
+                        
+                        let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                        
+                        dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                        let date = dateFormatter.date(from:publisheddate)!
+                        
+                        let dateago = date.timeAgoSinceDate()
+                        
+                        cell.author.text = book?.genre
+                        cell.datelabel.text = dateago
+            
            if wishlistids.contains(book!.bookID) {
                
                cell.likesimage.image = UIImage(named: "WriteSmall Copy 6")
@@ -421,6 +441,7 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
                  
                  cell.author.text = book?.genre
                  cell.datelabel.text = dateago
+            
                cell.quote.text = ""
                cell.likesnumber.text = ""
                
@@ -441,12 +462,12 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            
            queryforwishlists()
            
-           //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-           //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
-           //                       blurEffectView.frame = backimage2.bounds
-           //                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-           //
-           //                    backimage2.addSubview(blurEffectView)
+                               let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+                                  let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                                  blurEffectView.frame = backimage2.bounds
+                                  blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+           
+                               backimage2.addSubview(blurEffectView)
            //
       
            
@@ -509,7 +530,7 @@ class LoveViewController: UIViewController, UITableViewDataSource, UITableViewDe
            
            bookmarktapped = false
            
-
+referrer = "Love Tapped Blur"
 
            
            // Do any additional setup after loading the view.

@@ -32,6 +32,10 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         AppEvents.logEvent(AppEvents.Name(rawValue: "downvote tapped"), parameters: ["referrer" : referrer, "quoteid" : id])
     }
     
+    func quoteViewed(id : String) {
+         AppEvents.logEvent(AppEvents.Name(rawValue: "quote viewed"), parameters: ["referrer" : referrer, "quoteid" : id])
+     }
+    
     var genres = [String]()
     
     @IBOutlet weak var backimage: UIImageView!
@@ -170,7 +174,7 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
                             
                 if didpurchase {
                     
-                    
+                    self.performSegue(withIdentifier: "MoneyToRead", sender: self)
                     
                 } else {
                     
@@ -368,9 +372,26 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         let backgroundcounter = Int.random(in: 1..<20)
 
         cell.likesnumber.text = "\(backgroundcounter)K"
+            
+            var bookiddata = book?.bookID ?? "x"
+            
+        quoteViewed(id: bookiddata)
         
         cell.selectionStyle = .none
   
+            let dateFormatter = DateFormatter()
+                         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                         
+                         
+                         let publisheddate = book?.date ?? "2020-03-31 14:37:21"
+                         
+                         dateFormatter.dateFormat = "yyyy-MM-dd HH:mm:ss"
+                         let date = dateFormatter.date(from:publisheddate)!
+                         
+                         let dateago = date.timeAgoSinceDate()
+                         
+                         cell.author.text = book?.genre
+                         cell.datelabel.text = dateago
         
         if wishlistids.contains(book!.bookID) {
             
@@ -400,6 +421,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
             
         }//
             cell.blurimage.alpha = 0
+            
+            
             
         } else {
             
@@ -445,12 +468,12 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         
         queryforwishlists()
         
-        //                    let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
-        //                       let blurEffectView = UIVisualEffectView(effect: blurEffect)
-        //                       blurEffectView.frame = backimage2.bounds
-        //                       blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
-        //
-        //                    backimage2.addSubview(blurEffectView)
+                            let blurEffect = UIBlurEffect(style: UIBlurEffect.Style.dark)
+                               let blurEffectView = UIVisualEffectView(effect: blurEffect)
+                               blurEffectView.frame = backimage2.bounds
+                               blurEffectView.autoresizingMask = [.flexibleWidth, .flexibleHeight]
+        
+                            backimage2.addSubview(blurEffectView)
         //
    
         
@@ -463,6 +486,8 @@ class DepressionViewController: UIViewController, UITableViewDelegate, UITableVi
         
         
         queryforinfo()
+        
+        referrer = "Money Tapped Blur"
         
         
         genres.removeAll()

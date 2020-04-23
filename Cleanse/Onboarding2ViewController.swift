@@ -10,6 +10,7 @@ import UIKit
 import FBSDKCoreKit
 import FirebaseCore
 import Firebase
+import FirebaseMessaging
 
 var onboardinggenre = String()
 
@@ -28,7 +29,9 @@ class Onboarding2ViewController: UIViewController {
         
         ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
 
-        self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
+        
+        
+        self.performSegue(withIdentifier: "2to3", sender: self)
         
 
     }
@@ -39,8 +42,9 @@ class Onboarding2ViewController: UIViewController {
         logGenrePicked(referrer: onboardinggenre)
         
         ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
-
-        self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
+        
+      
+        self.performSegue(withIdentifier: "2to3", sender: self)
     }
     @IBAction func tapTwo(_ sender: Any) {
         
@@ -49,8 +53,10 @@ class Onboarding2ViewController: UIViewController {
         logGenrePicked(referrer: onboardinggenre)
         
         ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
+        
+         
 
-        self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
+        self.performSegue(withIdentifier: "2to3", sender: self)
     }
     @IBAction func tapOne(_ sender: Any) {
         
@@ -59,8 +65,9 @@ class Onboarding2ViewController: UIViewController {
         logGenrePicked(referrer: onboardinggenre)
         
         ref?.child("Users").child(uid).updateChildValues(["Onboarding" : onboardinggenre])
+        
 
-        self.performSegue(withIdentifier: "OnboardingToPaywall", sender: self)
+        self.performSegue(withIdentifier: "2to3", sender: self)
     }
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -68,9 +75,15 @@ class Onboarding2ViewController: UIViewController {
         ref = Database.database().reference()
 
         onboarding = true
+        logScreenView(referrer: "onboarding2")
 
         // Do any additional setup after loading the view.
     }
+    
+    func logScreenView(referrer : String) {
+                                  AppEvents.logEvent(AppEvents.Name(rawValue: "Onboarding2"), parameters: ["" : ""])
+                              }
+      
     
 
     /*
